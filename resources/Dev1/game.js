@@ -48,6 +48,7 @@ Any value returned is ignored.
 [options : Object] = A JavaScript object with optional data properties; see API documentation for details.
 */
 
+let cur = 0x11A503;
 PS.init = function( system, options ) {
 	// Uncomment the following code line
 	// to verify operation:
@@ -95,6 +96,7 @@ PS.touch = function( x, y, data, options ) {
 
 	// Add code here for mouse clicks/touches
 	// over a bead.
+
 };
 
 /*
@@ -113,6 +115,8 @@ PS.release = function( x, y, data, options ) {
 	// PS.debug( "PS.release() @ " + x + ", " + y + "\n" );
 
 	// Add code here for when the mouse button/touch is released over a bead.
+
+
 };
 
 /*
@@ -131,6 +135,7 @@ PS.enter = function( x, y, data, options ) {
 	// PS.debug( "PS.enter() @ " + x + ", " + y + "\n" );
 
 	// Add code here for when the mouse cursor/touch enters a bead.
+	PS.color(x,y,cur);
 };
 
 /*
@@ -149,6 +154,7 @@ PS.exit = function( x, y, data, options ) {
 	// PS.debug( "PS.exit() @ " + x + ", " + y + "\n" );
 
 	// Add code here for when the mouse cursor/touch exits a bead.
+	PS.color(x,y,0xFFFFFF);
 };
 
 /*
