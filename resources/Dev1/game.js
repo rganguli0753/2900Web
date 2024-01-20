@@ -101,6 +101,8 @@ PS.touch = function( x, y, data, options ) {
 	// Add code here for mouse clicks/touches
 	// over a bead.
 
+	//add something here about selecting which column the color goes up when clicked
+
 };
 
 /*
@@ -119,6 +121,8 @@ PS.release = function( x, y, data, options ) {
 	// PS.debug( "PS.release() @ " + x + ", " + y + "\n" );
 
 	// Add code here for when the mouse button/touch is released over a bead.
+	//add something here that sends the color of the bead upwards and then makes a fire work when in the last couple of rows
+	PS.color(x,y,0xFFFFFF);
 
 
 };
@@ -162,7 +166,8 @@ PS.exit = function( x, y, data, options ) {
 	// PS.debug( "PS.exit() @ " + x + ", " + y + "\n" );
 
 	// Add code here for when the mouse cursor/touch exits a bead.
-	//PS.color(x,y,0xFFFFFF);
+
+
 };
 
 /*
