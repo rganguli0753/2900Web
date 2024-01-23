@@ -53,8 +53,6 @@ cur.push(0x11a503,0x4b9e00,0x6a9600,0x838d00,0x9a8300,0xae7600,0xc16700,0xd25400
 	0xe90020,0xef0037,0xf1004e,0xed0067,0xe30082,0xd000a0,0xb300bd,0x8500da,0x0d1df3,
 	0x0055ff,0x006eff,0x007eff,0x0089f2,0x0091c8,0x009899,0x009e6a,0x00a33d,0x11a503);
 let counter = 0;
-var timerCounter = 20;
-var timerID;
 
 var curX;
 var curY;
@@ -108,8 +106,10 @@ PS.touch = function( x, y, data, options ) {
 	// over a bead.
 	curX=x;
 	curY=y;
-	timerCounter = -1*(0-y);
-	timerID = PS.timerStart(60,myTimer);
+	while(curY>=0){
+		PS.color(curX,curY,cur[counter]);
+		curY--;
+	}
 
 
 
@@ -253,16 +253,3 @@ PS.input = function( sensors, options ) {
 
 	// Add code here for when an input event is detected.
 };
-
-function myTimer(){
-	if(timerCounter>0){
-		while(curY>=0){
-			PS.color(curX,curY,cur[counter]);
-			curY--;
-		}
-		timerCounter-=1;
-	}else{
-		PS.timerStop(timerID);
-	}
-}
-
