@@ -53,8 +53,11 @@ cur.push(0x11a503,0x4b9e00,0x6a9600,0x838d00,0x9a8300,0xae7600,0xc16700,0xd25400
 	0xe90020,0xef0037,0xf1004e,0xed0067,0xe30082,0xd000a0,0xb300bd,0x8500da,0x0d1df3,
 	0x0055ff,0x006eff,0x007eff,0x0089f2,0x0091c8,0x009899,0x009e6a,0x00a33d,0x11a503);
 let counter = 0;
-var timerCounter = 5;
+var timerCounter = 20;
 var timerID;
+
+var curX;
+var curY;
 
 PS.init = function( system, options ) {
 	// Uncomment the following code line
@@ -80,7 +83,7 @@ PS.init = function( system, options ) {
 	// Uncomment the following code line and
 	// change the string parameter as needed.
 
-	 PS.statusText( "Moving Color" );
+	 PS.statusText( "Streakers" );
 
 	// Add any other initialization code you need here.
 };
@@ -96,7 +99,6 @@ This function doesn't have to do anything. Any value returned is ignored.
 */
 
 PS.touch = function( x, y, data, options ) {
-	timerCounter = 5;
 	// Uncomment the following code line
 	// to inspect x/y parameters:
 
@@ -104,10 +106,11 @@ PS.touch = function( x, y, data, options ) {
 
 	// Add code here for mouse clicks/touches
 	// over a bead.
+	curX=x;
+	curY=y;
+	timerCounter = -1*(0-y);
+	timerID = PS.timerStart(60,myTimer);
 
-	//add something here about selecting which column the color goes up when clicked
-	timerID = PS.timerStart(60, myTimer);
-	PS.color(x,y,cur[counter]);
 
 
 };
@@ -123,6 +126,7 @@ This function doesn't have to do anything. Any value returned is ignored.
 */
 
 PS.release = function( x, y, data, options ) {
+
 	// Uncomment the following code line to inspect x/y parameters:
 
 	// PS.debug( "PS.release() @ " + x + ", " + y + "\n" );
@@ -168,13 +172,13 @@ This function doesn't have to do anything. Any value returned is ignored.
 */
 
 PS.exit = function( x, y, data, options ) {
+
 	// Uncomment the following code line to inspect x/y parameters:
 
 	// PS.debug( "PS.exit() @ " + x + ", " + y + "\n" );
-	PS.color(x,y,0xFFFFFF);
 
 	// Add code here for when the mouse cursor/touch exits a bead.
-
+	PS.color(x,y,0xFFFFFF);
 
 };
 
@@ -252,10 +256,12 @@ PS.input = function( sensors, options ) {
 
 function myTimer(){
 	if(timerCounter>0){
-		PS.statusText("T-Minus "+ timerCounter);
+		while(curY>=0){
+			PS.color(curX,curY,cur[counter]);
+			curY--;
+		}
 		timerCounter-=1;
 	}else{
-		PS.statusText("Lift off!");
 		PS.timerStop(timerID);
 	}
 }
