@@ -75,10 +75,11 @@ PS.init = function( system, options ) {
     // Uncomment the following code line and change
     // the x and y parameters as needed.
 
-    PS.gridSize( 100, 100);
+    PS.gridSize( 100, 27);
 
 
     cur.forEach(eachFunction);
+    currentColor=cur[0];
 
     // This is also a good place to display
     // your game title or a welcome message
@@ -107,13 +108,18 @@ PS.touch = function( x, y, data, options ) {
 
     // PS.debug( "PS.touch() @ " + x + ", " + y + "\n" );
 
+
     // Add code here for mouse clicks/touches
     // over a bead.
     curX=x;
     curY=y;
-    while(curY>=0){
-        PS.color(curX,curY,cur[counter]);
-        curY--;
+    while(curY>=0&&x!==0){
+            PS.color(curX,curY,currentColor);
+            curY--;
+
+    }
+    if(x===0){
+        currentColor=cur[y];
     }
 
 
@@ -140,7 +146,6 @@ PS.release = function( x, y, data, options ) {
     //add something here that sends the color of the bead upwards and then makes a fire work when in the last couple of rows
 
 
-
 };
 
 /*
@@ -157,13 +162,10 @@ PS.enter = function( x, y, data, options ) {
     // Uncomment the following code line to inspect x/y parameters:
 
     // PS.debug( "PS.enter() @ " + x + ", " + y + "\n" );
-
-    // Add code here for when the mouse cursor/touch enters a bead.
-    PS.color(x,y,cur[counter]);
-    counter++;
-    if(counter===cur.length){
-        counter=0;
+    if(x!==0){
+        PS.color(x,y,currentColor);
     }
+    // Add code here for when the mouse cursor/touch enters a bead.
 };
 
 /*
@@ -183,7 +185,10 @@ PS.exit = function( x, y, data, options ) {
     // PS.debug( "PS.exit() @ " + x + ", " + y + "\n" );
 
     // Add code here for when the mouse cursor/touch exits a bead.
-    PS.color(x,y,0xFFFFFF);
+    if(x!==0){
+        PS.color(x,y,0xFFFFFF);
+    }
+
 
 };
 
