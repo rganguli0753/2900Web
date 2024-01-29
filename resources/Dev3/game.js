@@ -50,44 +50,40 @@ Any value returned is ignored.
 
 const cur = [];
 cur.push(0x11a503,0x4b9e00,0x6a9600,0x838d00,0x9a8300,0xae7600,0xc16700,0xd25400,0xe03b00,
-	0xe90020,0xef0037,0xf1004e,0xed0067,0xe30082,0xd000a0,0xb300bd,0x8500da,0x0d1df3,
-	0x0055ff,0x006eff,0x007eff,0x0089f2,0x0091c8,0x009899,0x009e6a,0x00a33d,0x11a503);
+    0xe90020,0xef0037,0xf1004e,0xed0067,0xe30082,0xd000a0,0xb300bd,0x8500da,0x0d1df3,
+    0x0055ff,0x006eff,0x007eff,0x0089f2,0x0091c8,0x009899,0x009e6a,0x00a33d,0x11a503);
 let counter = 0;
-var currentColor;
+
 var curX;
 var curY;
 
 PS.init = function( system, options ) {
-	// Uncomment the following code line
-	// to verify operation:
+    // Uncomment the following code line
+    // to verify operation:
 
-	// PS.debug( "PS.init() called\n" );
+    // PS.debug( "PS.init() called\n" );
 
-	// This function should normally begin
-	// with a call to PS.gridSize( x, y )
-	// where x and y are the desired initial
-	// dimensions of the grid.
-	// Call PS.gridSize() FIRST to avoid problems!
-	// The sample call below sets the grid to the
-	// default dimensions (8 x 8).
-	// Uncomment the following code line and change
-	// the x and y parameters as needed.
-	int rowNum = 0;
-	PS.gridSize( 100, 100)
-	for(Integer i: cur){
-		PS.color(0,rowNum,i);
-		rowNum++;
-	}
+    // This function should normally begin
+    // with a call to PS.gridSize( x, y )
+    // where x and y are the desired initial
+    // dimensions of the grid.
+    // Call PS.gridSize() FIRST to avoid problems!
+    // The sample call below sets the grid to the
+    // default dimensions (8 x 8).
+    // Uncomment the following code line and change
+    // the x and y parameters as needed.
 
-	// This is also a good place to display
-	// your game title or a welcome message
-	// in the status line above the grid.
-	// Uncomment the following code line and
-	// change the string parameter as needed.
+    PS.gridSize( 100, 100);
 
-	 PS.statusText( "Streakers" );
+    // This is also a good place to display
+    // your game title or a welcome message
+    // in the status line above the grid.
+    // Uncomment the following code line and
+    // change the string parameter as needed.
 
-	// Add any other initialization code you need here.
+    PS.statusText( "Streakers" );
+
+    // Add any other initialization code you need here.
 };
 
 /*
@@ -101,21 +97,19 @@ This function doesn't have to do anything. Any value returned is ignored.
 */
 
 PS.touch = function( x, y, data, options ) {
-	// Uncomment the following code line
-	// to inspect x/y parameters:
+    // Uncomment the following code line
+    // to inspect x/y parameters:
 
-	// PS.debug( "PS.touch() @ " + x + ", " + y + "\n" );
+    // PS.debug( "PS.touch() @ " + x + ", " + y + "\n" );
 
-	// Add code here for mouse clicks/touches
-	// over a bead.
-	curX=x;
-	curY=y;
-	while(curY>=0){
-		if(!x===0){
-			PS.color(curX,curY,currentColor);
-			curY--;
-		}
-	}
+    // Add code here for mouse clicks/touches
+    // over a bead.
+    curX=x;
+    curY=y;
+    while(curY>=0){
+        PS.color(curX,curY,cur[counter]);
+        curY--;
+    }
 
 
 
@@ -133,15 +127,13 @@ This function doesn't have to do anything. Any value returned is ignored.
 
 PS.release = function( x, y, data, options ) {
 
-	// Uncomment the following code line to inspect x/y parameters:
+    // Uncomment the following code line to inspect x/y parameters:
 
-	// PS.debug( "PS.release() @ " + x + ", " + y + "\n" );
+    // PS.debug( "PS.release() @ " + x + ", " + y + "\n" );
 
-	// Add code here for when the mouse button/touch is released over a bead.
-	//add something here that sends the color of the bead upwards and then makes a fire work when in the last couple of rows
-	if(x===0){
-		currentColor = cur[y];
-	}
+    // Add code here for when the mouse button/touch is released over a bead.
+    //add something here that sends the color of the bead upwards and then makes a fire work when in the last couple of rows
+
 
 
 };
@@ -157,12 +149,16 @@ This function doesn't have to do anything. Any value returned is ignored.
 */
 
 PS.enter = function( x, y, data, options ) {
-	// Uncomment the following code line to inspect x/y parameters:
+    // Uncomment the following code line to inspect x/y parameters:
 
-	// PS.debug( "PS.enter() @ " + x + ", " + y + "\n" );
+    // PS.debug( "PS.enter() @ " + x + ", " + y + "\n" );
 
-	// Add code here for when the mouse cursor/touch enters a bead.
-
+    // Add code here for when the mouse cursor/touch enters a bead.
+    PS.color(x,y,cur[counter]);
+    counter++;
+    if(counter===cur.length){
+        counter=0;
+    }
 };
 
 /*
@@ -177,14 +173,12 @@ This function doesn't have to do anything. Any value returned is ignored.
 
 PS.exit = function( x, y, data, options ) {
 
-	// Uncomment the following code line to inspect x/y parameters:
+    // Uncomment the following code line to inspect x/y parameters:
 
-	// PS.debug( "PS.exit() @ " + x + ", " + y + "\n" );
+    // PS.debug( "PS.exit() @ " + x + ", " + y + "\n" );
 
-	// Add code here for when the mouse cursor/touch exits a bead.
-	if(!x===0){
-		PS.color(x,y,0xFFFFFF);
-	}
+    // Add code here for when the mouse cursor/touch exits a bead.
+    PS.color(x,y,0xFFFFFF);
 
 };
 
@@ -196,11 +190,11 @@ This function doesn't have to do anything. Any value returned is ignored.
 */
 
 PS.exitGrid = function( options ) {
-	// Uncomment the following code line to verify operation:
+    // Uncomment the following code line to verify operation:
 
-	// PS.debug( "PS.exitGrid() called\n" );
+    // PS.debug( "PS.exitGrid() called\n" );
 
-	// Add code here for when the mouse cursor/touch moves off the grid.
+    // Add code here for when the mouse cursor/touch moves off the grid.
 };
 
 /*
@@ -214,11 +208,11 @@ This function doesn't have to do anything. Any value returned is ignored.
 */
 
 PS.keyDown = function( key, shift, ctrl, options ) {
-	// Uncomment the following code line to inspect first three parameters:
+    // Uncomment the following code line to inspect first three parameters:
 
-	// PS.debug( "PS.keyDown(): key=" + key + ", shift=" + shift + ", ctrl=" + ctrl + "\n" );
+    // PS.debug( "PS.keyDown(): key=" + key + ", shift=" + shift + ", ctrl=" + ctrl + "\n" );
 
-	// Add code here for when a key is pressed.
+    // Add code here for when a key is pressed.
 };
 
 /*
@@ -232,11 +226,11 @@ This function doesn't have to do anything. Any value returned is ignored.
 */
 
 PS.keyUp = function( key, shift, ctrl, options ) {
-	// Uncomment the following code line to inspect first three parameters:
+    // Uncomment the following code line to inspect first three parameters:
 
-	// PS.debug( "PS.keyUp(): key=" + key + ", shift=" + shift + ", ctrl=" + ctrl + "\n" );
+    // PS.debug( "PS.keyUp(): key=" + key + ", shift=" + shift + ", ctrl=" + ctrl + "\n" );
 
-	// Add code here for when a key is released.
+    // Add code here for when a key is released.
 };
 
 /*
@@ -249,7 +243,7 @@ NOTE: Currently, only mouse wheel events are reported, and only when the mouse c
 */
 
 PS.input = function( sensors, options ) {
-	// Uncomment the following code lines to inspect first parameter:
+    // Uncomment the following code lines to inspect first parameter:
 
 //	 var device = sensors.wheel; // check for scroll wheel
 //
@@ -257,5 +251,5 @@ PS.input = function( sensors, options ) {
 //	   PS.debug( "PS.input(): " + device + "\n" );
 //	 }
 
-	// Add code here for when an input event is detected.
+    // Add code here for when an input event is detected.
 };
