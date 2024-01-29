@@ -53,7 +53,7 @@ cur.push(0x11a503,0x4b9e00,0x6a9600,0x838d00,0x9a8300,0xae7600,0xc16700,0xd25400
 	0xe90020,0xef0037,0xf1004e,0xed0067,0xe30082,0xd000a0,0xb300bd,0x8500da,0x0d1df3,
 	0x0055ff,0x006eff,0x007eff,0x0089f2,0x0091c8,0x009899,0x009e6a,0x00a33d,0x11a503);
 let counter = 0;
-
+var currentColor;
 var curX;
 var curY;
 
@@ -72,8 +72,12 @@ PS.init = function( system, options ) {
 	// default dimensions (8 x 8).
 	// Uncomment the following code line and change
 	// the x and y parameters as needed.
-
-	 PS.gridSize( 100, 100);
+	int rowNum = 0;
+	PS.gridSize( 100, 100)
+	for(Integer i: cur){
+		PS.color(0,rowNum,i);
+		rowNum++;
+	}
 
 	// This is also a good place to display
 	// your game title or a welcome message
@@ -107,8 +111,10 @@ PS.touch = function( x, y, data, options ) {
 	curX=x;
 	curY=y;
 	while(curY>=0){
-		PS.color(curX,curY,cur[counter]);
-		curY--;
+		if(!x===0){
+			PS.color(curX,curY,currentColor);
+			curY--;
+		}
 	}
 
 
@@ -133,7 +139,9 @@ PS.release = function( x, y, data, options ) {
 
 	// Add code here for when the mouse button/touch is released over a bead.
 	//add something here that sends the color of the bead upwards and then makes a fire work when in the last couple of rows
-
+	if(x===0){
+		currentColor = cur[y];
+	}
 
 
 };
@@ -154,11 +162,7 @@ PS.enter = function( x, y, data, options ) {
 	// PS.debug( "PS.enter() @ " + x + ", " + y + "\n" );
 
 	// Add code here for when the mouse cursor/touch enters a bead.
-	PS.color(x,y,cur[counter]);
-	counter++;
-	if(counter===cur.length){
-		counter=0;
-	}
+
 };
 
 /*
@@ -178,7 +182,9 @@ PS.exit = function( x, y, data, options ) {
 	// PS.debug( "PS.exit() @ " + x + ", " + y + "\n" );
 
 	// Add code here for when the mouse cursor/touch exits a bead.
-	PS.color(x,y,0xFFFFFF);
+	if(!x===0){
+		PS.color(x,y,0xFFFFFF);
+	}
 
 };
 
