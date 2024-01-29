@@ -56,6 +56,8 @@ let counter = 0;
 
 var curX;
 var curY;
+var currentColor;
+var rowNum = 0;
 
 PS.init = function( system, options ) {
     // Uncomment the following code line
@@ -74,6 +76,9 @@ PS.init = function( system, options ) {
     // the x and y parameters as needed.
 
     PS.gridSize( 100, 100);
+
+
+    cur.forEach(eachFunction);
 
     // This is also a good place to display
     // your game title or a welcome message
@@ -253,3 +258,8 @@ PS.input = function( sensors, options ) {
 
     // Add code here for when an input event is detected.
 };
+
+function eachFunction(item, index, arr){
+    PS.color(0,rowNum,arr[index]);
+    rowNum++;
+}
