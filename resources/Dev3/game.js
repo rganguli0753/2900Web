@@ -75,7 +75,7 @@ PS.init = function( system, options ) {
     // Uncomment the following code line and change
     // the x and y parameters as needed.
 
-    PS.gridSize( 100, 27);
+    PS.gridSize( 200, 27);
 
 
     cur.forEach(eachFunction);
