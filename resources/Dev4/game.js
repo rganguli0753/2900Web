@@ -47,13 +47,13 @@ Any value returned is ignored.
 [system : Object] = A JavaScript object containing engine and host platform information properties; see API documentation for details.
 [options : Object] = A JavaScript object with optional data properties; see API documentation for details.
 */
-var red;
-var yellow;
-var orange;
-var green;
-var blue;
-var indigo;
-var violet;
+var red = PS.COLOR_RED;
+var yellow = PS.COLOR_YELLOW;
+var orange = PS.COLOR_ORANGE;
+var green = PS.COLOR_GREEN;
+var blue = PS.COLOR_BLUE;
+var indigo = PS.COLOR_INDIGO;
+var violet = PS.COLOR_VIOLET;
 var curX;
 var curY;
 
@@ -79,6 +79,27 @@ PS.init = function( system, options ) {
      PS.color(0,0,PS.COLOR_BLACK);
      curX=0;
      curY=0;
+     var x = Math.floor(Math.random()*20);
+     var y = Math.floor(Math.random()*20);
+     PS.color(x,y,red);
+     x = Math.floor(Math.random()*20);
+     y = Math.floor(Math.random()*20);
+     PS.color(x,y,orange);
+     x = Math.floor(Math.random()*20);
+     y = Math.floor(Math.random()*20);
+     PS.color(x,y,yellow);
+     x = Math.floor(Math.random()*20);
+     y = Math.floor(Math.random()*20);
+     PS.color(x,y,green);
+     x = Math.floor(Math.random()*20);
+     y = Math.floor(Math.random()*20);
+     PS.color(x,y,blue);
+     x = Math.floor(Math.random()*20);
+     y = Math.floor(Math.random()*20);
+     PS.color(x,y,indigo);
+     x = Math.floor(Math.random()*20);
+     y = Math.floor(Math.random()*20);
+     PS.color(x,y,violet);
 
 	// This is also a good place to display
 	// your game title or a welcome message
