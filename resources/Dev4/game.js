@@ -54,8 +54,16 @@ var green = PS.COLOR_GREEN;
 var blue = PS.COLOR_BLUE;
 var indigo = PS.COLOR_INDIGO;
 var violet = PS.COLOR_VIOLET;
-var curX;
-var curY;
+
+var leftColors = {red,yellow,orange,green,blue,indigo,violet};
+
+var redX, redY;
+var yellowX,yellowY;
+var orangeX,orangeY;
+var greenX,greenY;
+var blueX,blueY;
+var indigoX,indigoY;
+var violetX,violetY;
 
 PS.init = function( system, options ) {
 
@@ -76,30 +84,34 @@ PS.init = function( system, options ) {
 	// the x and y parameters as needed.
 
 	 PS.gridSize( 20, 20 );
-     PS.color(0,0,PS.COLOR_BLACK);
-     curX=0;
-     curY=0;
-     var x = Math.floor(Math.random()*20);
-     var y = Math.floor(Math.random()*20);
-     PS.color(x,y,red);
-     x = Math.floor(Math.random()*20);
-     y = Math.floor(Math.random()*20);
-     PS.color(x,y,orange);
-     x = Math.floor(Math.random()*20);
-     y = Math.floor(Math.random()*20);
-     PS.color(x,y,yellow);
-     x = Math.floor(Math.random()*20);
-     y = Math.floor(Math.random()*20);
-     PS.color(x,y,green);
-     x = Math.floor(Math.random()*20);
-     y = Math.floor(Math.random()*20);
-     PS.color(x,y,blue);
-     x = Math.floor(Math.random()*20);
-     y = Math.floor(Math.random()*20);
-     PS.color(x,y,indigo);
-     x = Math.floor(Math.random()*20);
-     y = Math.floor(Math.random()*20);
-     PS.color(x,y,violet);
+
+     redX = Math.floor(Math.random()*20);
+     redY = Math.floor(Math.random()*20);
+     PS.color(redX,redY,red);
+
+     orangeX = Math.floor(Math.random()*20);
+     orangeY = Math.floor(Math.random()*20);
+     PS.color(orangeX,orangeY,orange);
+
+     yellowX = Math.floor(Math.random()*20);
+     yellowY = Math.floor(Math.random()*20);
+     PS.color(yellowX,yellowY,yellow);
+
+     greenX = Math.floor(Math.random()*20);
+     greenY = Math.floor(Math.random()*20);
+     PS.color(greenX,greenY,green);
+
+     blueX = Math.floor(Math.random()*20);
+     blueY = Math.floor(Math.random()*20);
+     PS.color(blueX,blueY,blue);
+
+     indigoX = Math.floor(Math.random()*20);
+     indigoY = Math.floor(Math.random()*20);
+     PS.color(indigoX,indigoY,indigo);
+
+     violetX = Math.floor(Math.random()*20);
+     violetY = Math.floor(Math.random()*20);
+     PS.color(violetX,violetY,violet);
 
 	// This is also a good place to display
 	// your game title or a welcome message
@@ -129,6 +141,9 @@ PS.touch = function( x, y, data, options ) {
 	// PS.debug( "PS.touch() @ " + x + ", " + y + "\n" );
 
 	// Add code here for mouse clicks/touches
+
+    //TODO WRITE HERE FOR THE METHODOLOGY AND ORDER OF THE COLORS
+
 	// over a bead.
 };
 
@@ -215,55 +230,7 @@ PS.keyDown = function( key, shift, ctrl, options ) {
 	// Uncomment the following code line to inspect first three parameters:
 
 	// PS.debug( "PS.keyDown(): key=" + key + ", shift=" + shift + ", ctrl=" + ctrl + "\n" );
-    if(curX===20){
-        PS.color(curX,curY,PS.COLOR_WHITE);
-        curX--;
-        PS.color(curX,curY,PS.COLOR_BLACK);
-    }else if(curY===20){
-        PS.color(curX,curY,PS.COLOR_WHITE);
-        curY--;
-        PS.color(curX,curY,PS.COLOR_BLACK);
-    }else if(curX===0){
-        PS.color(curX,curY,PS.COLOR_WHITE);
-        curX++;
-        PS.color(curX,curY,PS.COLOR_BLACK);
-    }else if(curY===0) {
-        PS.color(curX, curY, PS.COLOR_WHITE);
-        curY++;
-        PS.color(curX, curY, PS.COLOR_BLACK);
-    }
-    switch(key){
-        case PS.KEY_ARROW_LEFT:
-            if(curX!==0){
-                PS.color(curX,curY,PS.COLOR_WHITE);
-                curX--;
-                PS.color(curX,curY,PS.COLOR_BLACK);
-            }
-            break;
-        case PS.KEY_ARROW_RIGHT:
-            if(curX!==20){
-                PS.color(curX,curY,PS.COLOR_WHITE);
-                curX++;
-                PS.color(curX,curY,PS.COLOR_BLACK);
-            }
-            break;
-        case PS.KEY_ARROW_UP:
-            if(curY!==0){
-                PS.color(curX,curY,PS.COLOR_WHITE);
-                curY--;
-                PS.color(curX,curY,PS.COLOR_BLACK);
-            }
-            break;
-        case PS.KEY_ARROW_DOWN:
-            if(curY!==20){
-                PS.color(curX,curY,PS.COLOR_WHITE);
-                curY++;
-                PS.color(curX,curY,PS.COLOR_BLACK);
-            }
-            break;
-        default:
-            break;
-    }
+
 
 	// Add code here for when a key is pressed.
 };
