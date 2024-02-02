@@ -55,7 +55,8 @@ var blue = PS.COLOR_BLUE;
 var indigo = PS.COLOR_INDIGO;
 var violet = PS.COLOR_VIOLET;
 
-var leftColors = {red,yellow,orange,green,blue,indigo,violet};
+const leftColors = [];
+leftColors.push(red,orange,yellow,green,blue,indigo,violet);
 
 var redX, redY;
 var yellowX,yellowY;
@@ -141,8 +142,9 @@ PS.touch = function( x, y, data, options ) {
 	// PS.debug( "PS.touch() @ " + x + ", " + y + "\n" );
 
 	// Add code here for mouse clicks/touches
-
-    //TODO WRITE HERE FOR THE METHODOLOGY AND ORDER OF THE COLORS
+    if(PS.color(x,y)===leftColors[0]){
+       
+    }
 
 	// over a bead.
 };
@@ -161,6 +163,7 @@ PS.release = function( x, y, data, options ) {
 	// Uncomment the following code line to inspect x/y parameters:
 
 	// PS.debug( "PS.release() @ " + x + ", " + y + "\n" );
+
 
 	// Add code here for when the mouse button/touch is released over a bead.
 };
