@@ -66,9 +66,11 @@ var blueX,blueY;
 var indigoX,indigoY;
 var violetX,violetY;
 
+var status = "ROYGBIV";
+
 PS.init = function( system, options ) {
 
-    PS.statusText("RYOGBIV");
+    PS.statusText(status);
 	// Uncomment the following code line
 	// to verify operation:
 
@@ -143,7 +145,16 @@ PS.touch = function( x, y, data, options ) {
 
 	// Add code here for mouse clicks/touches
     if(PS.color(x,y)===leftColors[0]){
-       
+        status = status.substring(1);
+        PS.statusText(status);
+        leftColors.shift();
+        if(status===""){
+            PS.statusText("CONGRATS YOU WIN, REFRESH TO TRY AGAIN OR SOLVE FASTER");
+        }
+    }else if(PS.color(x,y)===PS.COLOR_WHITE){
+
+    }else{
+        PS.statusText("GAME OVER, REFRESH TO TRY AGAIN");
     }
 
 	// over a bead.
