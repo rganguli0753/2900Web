@@ -52,8 +52,8 @@ var yellow = PS.COLOR_YELLOW;
 var orange = PS.COLOR_ORANGE;
 var green = PS.COLOR_GREEN;
 var blue = PS.COLOR_BLUE;
-var indigo = PS.COLOR_INDIGO;
-var violet = PS.COLOR_VIOLET;
+var indigo = 0x1F0954;
+var violet = 0x9400d3;
 
 const leftColors = [];
 leftColors.push(red,orange,yellow,green,blue,indigo,violet);
@@ -86,7 +86,7 @@ PS.init = function( system, options ) {
     // Uncomment the following code line and change
     // the x and y parameters as needed.
 
-    PS.gridSize( 10, 10 );
+    PS.gridSize(10, 10);
 
     redX = Math.floor(Math.random()*9);
     redY = Math.floor(Math.random()*9)
@@ -148,6 +148,7 @@ PS.touch = function( x, y, data, options ) {
         status = status.substring(1);
         PS.statusText(status);
         leftColors.shift();
+        PS.color(x,y,PS.COLOR_WHITE);
         if(status===""){
             PS.statusText("CONGRATS YOU WIN, REFRESH TO TRY AGAIN OR SOLVE FASTER");
         }
