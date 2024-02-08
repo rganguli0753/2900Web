@@ -86,34 +86,34 @@ PS.init = function( system, options ) {
     // Uncomment the following code line and change
     // the x and y parameters as needed.
 
-    PS.gridSize( 20, 20 );
+    PS.gridSize( 10, 10 );
 
-    redX = Math.floor(Math.random()*20);
-    redY = Math.floor(Math.random()*20);
+    redX = Math.floor(Math.random()*9);
+    redY = Math.floor(Math.random()*9)
     PS.color(redX,redY,red);
 
-    orangeX = Math.floor(Math.random()*20);
-    orangeY = Math.floor(Math.random()*20);
+    orangeX = Math.floor(Math.random()*9);
+    orangeY = Math.floor(Math.random()*9);
     PS.color(orangeX,orangeY,orange);
 
-    yellowX = Math.floor(Math.random()*20);
-    yellowY = Math.floor(Math.random()*20);
+    yellowX = Math.floor(Math.random()*9);
+    yellowY = Math.floor(Math.random()*9);
     PS.color(yellowX,yellowY,yellow);
 
-    greenX = Math.floor(Math.random()*20);
-    greenY = Math.floor(Math.random()*20);
+    greenX = Math.floor(Math.random()*9);
+    greenY = Math.floor(Math.random()*9);
     PS.color(greenX,greenY,green);
 
-    blueX = Math.floor(Math.random()*20);
-    blueY = Math.floor(Math.random()*20);
+    blueX = Math.floor(Math.random()*9);
+    blueY = Math.floor(Math.random()*9);
     PS.color(blueX,blueY,blue);
 
-    indigoX = Math.floor(Math.random()*20);
-    indigoY = Math.floor(Math.random()*20);
+    indigoX = Math.floor(Math.random()*9);
+    indigoY = Math.floor(Math.random()*9);
     PS.color(indigoX,indigoY,indigo);
 
-    violetX = Math.floor(Math.random()*20);
-    violetY = Math.floor(Math.random()*20);
+    violetX = Math.floor(Math.random()*9);
+    violetY = Math.floor(Math.random()*9);
     PS.color(violetX,violetY,violet);
 
     // This is also a good place to display
