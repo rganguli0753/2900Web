@@ -299,6 +299,8 @@ function spawn(){
     var pink = 0xFFC0CB;
     var lime = 0x8cc43c;
     var cyan = 0x5bc0de;
+    var magenta = 0xff00ff;
+    var amber = 0xFFBF00;
     if(level===2){
         PS.gridSize(15,15);
         status = "RPOYLGCBIV";
@@ -342,6 +344,58 @@ function spawn(){
 
         violetX = Math.floor(Math.random()*14);
         violetY = Math.floor(Math.random()*14);
+        PS.color(violetX,violetY,violet);
+    }else if(level===3){
+        PS.gridSize(20,20);
+        status = "RPOYALGCBIMV";
+        leftColors.push(red,pink,orange,yellow,amber,lime,green,cyan,blue,indigo,magenta,violet);
+        PS.statusText(status);
+        redX = Math.floor(Math.random()*19);
+        redY = Math.floor(Math.random()*19)
+        PS.color(redX,redY,red);
+
+        var pinkX = Math.floor(Math.random()*19);
+        var pinkY = Math.floor(Math.random()*19);
+        PS.color(pinkX,pinkY,pink);
+
+        orangeX = Math.floor(Math.random()*19);
+        orangeY = Math.floor(Math.random()*19);
+        PS.color(orangeX,orangeY,orange);
+
+        yellowX = Math.floor(Math.random()*19);
+        yellowY = Math.floor(Math.random()*19);
+        PS.color(yellowX,yellowY,yellow);
+
+        var amberX = Math.floor(Math.random()*19);
+        var amberY = Math.floor(Math.random()*19);
+        PS.color(amberX,amberY,amber);
+
+        var limeX = Math.floor(Math.random()*19);
+        var limeY = Math.floor(Math.random()*19);
+        PS.color(limeX,limeY,lime);
+
+        greenX = Math.floor(Math.random()*19);
+        greenY = Math.floor(Math.random()*19);
+        PS.color(greenX,greenY,green);
+
+        var cyanX = Math.floor(Math.random()*19);
+        var cyanY = Math.floor(Math.random()*19);
+        PS.color(cyanX,cyanY,cyan);
+
+        blueX = Math.floor(Math.random()*19);
+        blueY = Math.floor(Math.random()*19);
+        PS.color(blueX,blueY,blue);
+
+        indigoX = Math.floor(Math.random()*19);
+        indigoY = Math.floor(Math.random()*19);
+        PS.color(indigoX,indigoY,indigo);
+
+        var magentaX = Math.floor(Math.random()*19);
+        var magentaY = Math.floor(Math.random()*19);
+        PS.color(magentaX,magentaY,magenta);
+
+        violetX = Math.floor(Math.random()*19);
+        violetY = Math.floor(Math.random()*19);
         PS.color(violetX,violetY,violet);
     }
 };
