@@ -67,6 +67,7 @@ var indigoX,indigoY;
 var violetX,violetY;
 
 var status = "ROYGBIV";
+var level=1;
 
 PS.init = function( system, options ) {
 
@@ -150,7 +151,12 @@ PS.touch = function( x, y, data, options ) {
         leftColors.shift();
         PS.color(x,y,PS.COLOR_WHITE);
         if(status===""){
-            PS.statusText("CONGRATS YOU WIN, REFRESH TO TRY AGAIN OR SOLVE FASTER");
+            level++;
+            if(level===4){
+                PS.statusText("CONGRATS YOU WIN, REFRESH TO TRY AGAIN OR SOLVE FASTER");
+            }else{
+                spawn();
+            }
         }
     }else if(PS.color(x,y)===PS.COLOR_WHITE){
 
@@ -287,5 +293,56 @@ PS.input = function( sensors, options ) {
 //	 }
 
     // Add code here for when an input event is detected.
+};
+
+function spawn(){
+    var pink = 0xFFC0CB;
+    var lime = 0x8cc43c;
+    var cyan = 0x5bc0de;
+    if(level===2){
+        PS.gridSize(15,15);
+        status = "RPOYLGCBIV";
+        leftColors.push(red,pink,orange,yellow,lime,green,cyan,blue,indigo,violet);
+        PS.statusText(status);
+        redX = Math.floor(Math.random()*14);
+        redY = Math.floor(Math.random()*14)
+        PS.color(redX,redY,red);
+
+        var pinkX = Math.floor(Math.random()*14);
+        var pinkY = Math.floor(Math.random()*14);
+        PS.color(pinkX,pinkY,pink);
+
+        orangeX = Math.floor(Math.random()*14);
+        orangeY = Math.floor(Math.random()*14);
+        PS.color(orangeX,orangeY,orange);
+
+        yellowX = Math.floor(Math.random()*14);
+        yellowY = Math.floor(Math.random()*14);
+        PS.color(yellowX,yellowY,yellow);
+
+        var limeX = Math.floor(Math.random()*14);
+        var limeY = Math.floor(Math.random()*14);
+        PS.color(limeX,limeY,lime);
+
+        greenX = Math.floor(Math.random()*14);
+        greenY = Math.floor(Math.random()*14);
+        PS.color(greenX,greenY,green);
+
+        var cyanX = Math.floor(Math.random()*14);
+        var cyanY = Math.floor(Math.random()*14);
+        PS.color(cyanX,cyanY,cyan);
+
+        blueX = Math.floor(Math.random()*14);
+        blueY = Math.floor(Math.random()*14);
+        PS.color(blueX,blueY,blue);
+
+        indigoX = Math.floor(Math.random()*14);
+        indigoY = Math.floor(Math.random()*14);
+        PS.color(indigoX,indigoY,indigo);
+
+        violetX = Math.floor(Math.random()*14);
+        violetY = Math.floor(Math.random()*14);
+        PS.color(violetX,violetY,violet);
+    }
 };
 
