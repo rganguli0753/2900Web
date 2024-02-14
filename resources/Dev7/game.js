@@ -64,7 +64,14 @@ PS.init = function( system, options ) {
 	// Uncomment the following code line and change
 	// the x and y parameters as needed.
 
-	// PS.gridSize( 8, 8 );
+	PS.gridSize(20,20);
+    for(let i=0; i<20;i++){
+        for(let j=0; j<20;j++)
+            PS.color(i,j,PS.COLOR_BLUE);
+    }
+    for(let i=0; i<20;i++)
+        if(i%2===0)
+            PS.color(i,0,PS.COLOR_WHITE);
 
 	// This is also a good place to display
 	// your game title or a welcome message
