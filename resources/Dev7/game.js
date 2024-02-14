@@ -69,11 +69,15 @@ PS.init = function( system, options ) {
         for(let j=0; j<20;j++)
             PS.color(i,j,PS.COLOR_BLUE);
     }
-    for(let i=0; i<20;i++)
+    for(let i=0; i<20;i++){
+        PS.glyph(i,0,"*");
         if(i%2===0)
             PS.color(i,0,PS.COLOR_WHITE);
+    }
 
-	// This is also a good place to display
+
+
+    // This is also a good place to display
 	// your game title or a welcome message
 	// in the status line above the grid.
 	// Uncomment the following code line and
