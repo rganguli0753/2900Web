@@ -76,7 +76,7 @@ PS.init = function( system, options ) {
             PS.color(i,0,PS.COLOR_WHITE);
     }
 
-
+    PS.statusText("Man I Love Fishing");
 
     // This is also a good place to display
 	// your game title or a welcome message
@@ -103,6 +103,9 @@ PS.touch = function( x, y, data, options ) {
     if(PS.glyph(x,y)===PS.glyph(x,y,"*")){
         PS.statusText("Castin the line!");
     }
+    PS.statusText("Gotta click from the shore!");
+    PS.glyph(x,y,"");
+
 	// Uncomment the following code line
 	// to inspect x/y parameters:
 
