@@ -47,7 +47,8 @@ Any value returned is ignored.
 [system : Object] = A JavaScript object containing engine and host platform information properties; see API documentation for details.
 [options : Object] = A JavaScript object with optional data properties; see API documentation for details.
 */
-
+var columnNum = 10;
+var rowNum = 10;
 PS.init = function( system, options ) {
 	// Uncomment the following code line
 	// to verify operation:
@@ -64,12 +65,12 @@ PS.init = function( system, options ) {
 	// Uncomment the following code line and change
 	// the x and y parameters as needed.
 
-	PS.gridSize(20,20);
-    for(let i=0; i<20;i++){
-        for(let j=0; j<20;j++)
+	PS.gridSize(columnNum,rowNum);
+    for(let i=0; i<columnNum;i++){
+        for(let j=0; j<rowNum;j++)
             PS.color(i,j,PS.COLOR_BLUE);
     }
-    for(let i=0; i<20;i++){
+    for(let i=0; i<columnNum;i++){
         PS.glyph(i,0,"*");
         if(i%2===0)
             PS.color(i,0,PS.COLOR_WHITE);
