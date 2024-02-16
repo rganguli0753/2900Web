@@ -49,6 +49,7 @@ Any value returned is ignored.
 */
 var columnNum = 10;
 var rowNum = 10;
+var fishnum = 5;
 PS.init = function( system, options ) {
 	// Uncomment the following code line
 	// to verify operation:
@@ -75,8 +76,9 @@ PS.init = function( system, options ) {
         if(i%2===0)
             PS.color(i,0,PS.COLOR_WHITE);
     }
-
+    PS.seed(columnNum);
     PS.statusText("Man I Love Fishing");
+    fishSpawn();
 
     // This is also a good place to display
 	// your game title or a welcome message
@@ -242,6 +244,12 @@ PS.input = function( sensors, options ) {
 };
 
 function fishSpawn(){
-    var fishLeft = "<><";
-    var fishRight = "><>";
+    var fishLeft = "<";
+    var fishRight = ">";
+    if(fishnum>0){
+        var fishRow = PS.random(rowNum);
+        var fishCol = PS.random(columnNum);
+        PS.glyph(fishRow,fishCol,fishLeft);
+        fishnum--;
+    }
 }
