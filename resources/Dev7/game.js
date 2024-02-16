@@ -102,10 +102,10 @@ This function doesn't have to do anything. Any value returned is ignored.
 PS.touch = function( x, y, data, options ) {
     if(PS.glyph(x,y)===PS.glyph(x,y,"*")){
         PS.statusText("Castin the line!");
+    }else{
+        PS.statusText("Gotta click from the shore!");
+        PS.glyph(x,y,"");
     }
-    PS.statusText("Gotta click from the shore!");
-    PS.glyph(x,y,"");
-
 	// Uncomment the following code line
 	// to inspect x/y parameters:
 
