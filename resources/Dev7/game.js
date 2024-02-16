@@ -241,3 +241,7 @@ PS.input = function( sensors, options ) {
 	// Add code here for when an input event is detected.
 };
 
+function fishSpawn(){
+    var fishLeft = "<><";
+    var fishRight = "><>";
+}
