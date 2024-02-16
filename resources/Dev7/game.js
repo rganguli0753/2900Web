@@ -50,6 +50,8 @@ Any value returned is ignored.
 var columnNum = 10;
 var rowNum = 10;
 var fishnum = 5;
+const rightFish = [];
+const leftFish = [];
 PS.init = function( system, options ) {
 	// Uncomment the following code line
 	// to verify operation:
@@ -249,9 +251,22 @@ function fishSpawn(){
     var fishRight = ">";
     var fishRow = PS.random(rowNum);
     var fishCol = PS.random(columnNum-1);
-    if(fishCol<columnNum/2)
+    if(fishCol<columnNum/2){
         PS.glyph(fishRow,fishCol,fishLeft);
-    if(fishCol>columnNum/2)
+        leftFish.push(fishCol);
+    }
+    if(fishCol>columnNum/2){
         PS.glyph(fishRow,fishCol,fishRight);
+        rightFish.push(fishCol);
+    }
+
     fishnum--;
+}
+
+function fishMovement(){
+
+}
+
+function castLine(){
+
 }
