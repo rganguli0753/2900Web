@@ -76,9 +76,10 @@ PS.init = function( system, options ) {
         if(i%2===0)
             PS.color(i,0,PS.COLOR_WHITE);
     }
-    PS.seed(columnNum);
+    PS.seed(Math.floor(Math.random() * columnNum));
     PS.statusText("Man I Love Fishing");
-    fishSpawn();
+    while(fishnum>0)
+        fishSpawn();
 
     // This is also a good place to display
 	// your game title or a welcome message
@@ -246,10 +247,11 @@ PS.input = function( sensors, options ) {
 function fishSpawn(){
     var fishLeft = "<";
     var fishRight = ">";
-    if(fishnum>0){
-        var fishRow = PS.random(rowNum);
-        var fishCol = PS.random(columnNum);
+    var fishRow = PS.random(rowNum);
+    var fishCol = PS.random(columnNum-1);
+    if(fishCol<columnNum/2)
         PS.glyph(fishRow,fishCol,fishLeft);
-        fishnum--;
-    }
+    if(fishCol>columnNum/2)
+        PS.glyph(fishRow,fishCol,fishRight);
+    fishnum--;
 }
