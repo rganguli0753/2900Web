@@ -50,8 +50,9 @@ Any value returned is ignored.
 var columnNum = 10;
 var rowNum = 10;
 var fishnum = 5;
-const rightFish = [];
-const leftFish = [];
+var fishLeft = "<";
+var fishRight = ">";
+
 PS.init = function( system, options ) {
 	// Uncomment the following code line
 	// to verify operation:
@@ -247,24 +248,34 @@ PS.input = function( sensors, options ) {
 };
 
 function fishSpawn(){
-    var fishLeft = "<";
-    var fishRight = ">";
     var fishRow = PS.random(rowNum);
     var fishCol = PS.random(columnNum-1);
     if(fishCol<columnNum/2){
         PS.glyph(fishRow,fishCol,fishLeft);
-        leftFish.push(fishCol);
     }
     if(fishCol>columnNum/2){
         PS.glyph(fishRow,fishCol,fishRight);
-        rightFish.push(fishCol);
     }
 
     fishnum--;
 }
 
 function fishMovement(){
-
+    for(let x= 1;x < rowNum;x++){
+        for(let y = 0; y < columnNum;y++){
+            if(PS.glyph(x,y)===PS.glyph(x,y,fishLeft)){
+                if(y-1<0){
+                    PS.glyph(x,columnNum,fishLeft);
+                }
+                PS.glyph(x,y--,fishLeft);
+            }else if(PS.glyph(x,y)===PS.glyph(x,y,fishRight)){
+                if(y++>columnNum){
+                    PS.glyph(x,0,fishRight);
+                }
+                PS.glyph(x,y++,fishRight)
+            }
+        }
+    }
 }
 
 function castLine(){
