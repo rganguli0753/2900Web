@@ -52,6 +52,8 @@ var rowNum = 10;
 var fishnum = 5;
 var fishLeft = "<";
 var fishRight = ">";
+//var counter=20;
+//var timerID;
 
 PS.init = function( system, options ) {
 	// Uncomment the following code line
@@ -84,6 +86,8 @@ PS.init = function( system, options ) {
     while(fishnum>0)
         fishSpawn();
 
+    //timerID = PS.timerStart(60,fishMovement);
+
     // This is also a good place to display
 	// your game title or a welcome message
 	// in the status line above the grid.
@@ -108,6 +112,7 @@ This function doesn't have to do anything. Any value returned is ignored.
 PS.touch = function( x, y, data, options ) {
     if(PS.glyph(x,y)===PS.glyph(x,y,"*")){
         PS.statusText("Castin the line!");
+        castLine();
     }else{
         PS.statusText("Gotta click from the shore!");
         PS.glyph(x,y,"");
@@ -260,24 +265,28 @@ function fishSpawn(){
     fishnum--;
 }
 
-function fishMovement(){
-    for(let x= 1;x < rowNum;x++){
-        for(let y = 0; y < columnNum;y++){
-            if(PS.glyph(x,y)===PS.glyph(x,y,fishLeft)){
-                if(y-1<0){
-                    PS.glyph(x,columnNum,fishLeft);
-                }
-                PS.glyph(x,y--,fishLeft);
-            }else if(PS.glyph(x,y)===PS.glyph(x,y,fishRight)){
-                if(y++>columnNum){
-                    PS.glyph(x,0,fishRight);
-                }
-                PS.glyph(x,y++,fishRight)
-            }
-        }
-    }
-}
+// function fishMovement(){
+//     if(counter<1){
+//         PS.timerStop();
+//     }
+//     for(let x= 1;x < rowNum;x++){
+//         for(let y = 0; y < columnNum;y++){
+//             if(PS.glyph(x,y)===PS.glyph(x,y,fishLeft)){
+//                 if(y-1<0){
+//                     PS.glyph(x,columnNum,fishLeft);
+//                 }
+//                 PS.glyph(x,y--,fishLeft);
+//             }else if(PS.glyph(x,y)===PS.glyph(x,y,fishRight)){
+//                 if(y++>columnNum){
+//                     PS.glyph(x,0,fishRight);
+//                 }
+//                 PS.glyph(x,y++,fishRight)
+//             }
+//             counter--;
+//         }
+//     }
+// }
 
-function castLine(){
+function castLine(x){
 
 }
