@@ -85,7 +85,7 @@ PS.init = function( system, options ) {
     PS.statusText("Man I Love Fishing");
     while(fishnum>0)
         fishSpawn();
-
+    fishnum=5;
     //timerID = PS.timerStart(60,fishMovement);
 
     // This is also a good place to display
@@ -112,7 +112,7 @@ This function doesn't have to do anything. Any value returned is ignored.
 PS.touch = function( x, y, data, options ) {
     if(PS.glyph(x,y)===PS.glyph(x,y,"*")){
         PS.statusText("Castin the line!");
-        castLine();
+        castLine(x);
     }else{
         PS.statusText("Gotta click from the shore!");
         PS.glyph(x,y,"");
@@ -288,5 +288,21 @@ function fishSpawn(){
 // }
 
 function castLine(x){
-
+    var fishCount=0;
+    for(let y=0;y<rowNum;y++){
+        var glyphAt = PS.glyph(x,y)
+        if(glyphAt===PS.glyph(x,y,fishLeft)||glyphAt===PS.glyph(x,y,fishRight)){
+            fishCount++;
+            PS.glyph(x,y,"");
+            fishnum--;
+            fishCount++;
+        }else{
+            PS.glyph(x,y,"");
+        }
+        PS.glyph(x,0,"*");
+        PS.statusText("Caught "+fishCount/2+" of'em!");
+    }
+    if(fishnum<1){
+        PS.statusText("You caught all of them, refresh for a new pond");
+    }
 }
