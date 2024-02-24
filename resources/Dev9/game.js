@@ -47,34 +47,56 @@ Any value returned is ignored.
 [system : Object] = A JavaScript object containing engine and host platform information properties; see API documentation for details.
 [options : Object] = A JavaScript object with optional data properties; see API documentation for details.
 */
+var columnNum = 10;
+var rowNum = 10;
+var fishnum = 5;
+var fishLeft = "<";
+var fishRight = ">";
+//var counter=20;
+//var timerID;
 
 PS.init = function( system, options ) {
-	// Uncomment the following code line
-	// to verify operation:
+    // Uncomment the following code line
+    // to verify operation:
 
-	// PS.debug( "PS.init() called\n" );
+    // PS.debug( "PS.init() called\n" );
 
-	// This function should normally begin
-	// with a call to PS.gridSize( x, y )
-	// where x and y are the desired initial
-	// dimensions of the grid.
-	// Call PS.gridSize() FIRST to avoid problems!
-	// The sample call below sets the grid to the
-	// default dimensions (8 x 8).
-	// Uncomment the following code line and change
-	// the x and y parameters as needed.
+    // This function should normally begin
+    // with a call to PS.gridSize( x, y )
+    // where x and y are the desired initial
+    // dimensions of the grid.
+    // Call PS.gridSize() FIRST to avoid problems!
+    // The sample call below sets the grid to the
+    // default dimensions (8 x 8).
+    // Uncomment the following code line and change
+    // the x and y parameters as needed.
 
-	// PS.gridSize( 8, 8 );
+    PS.gridSize(columnNum,rowNum);
+    for(let i=0; i<columnNum;i++){
+        for(let j=0; j<rowNum;j++)
+            PS.color(i,j,PS.COLOR_BLUE);
+    }
+    for(let i=0; i<columnNum;i++){
+        PS.glyph(i,0,"*");
+        if(i%2===0)
+            PS.color(i,0,PS.COLOR_WHITE);
+    }
+    PS.seed(Math.floor(Math.random() * columnNum));
+    PS.statusText("Man I Love Fishing");
+    while(fishnum>0)
+        fishSpawn();
+    fishnum=5;
+    //timerID = PS.timerStart(60,fishMovement);
 
-	// This is also a good place to display
-	// your game title or a welcome message
-	// in the status line above the grid.
-	// Uncomment the following code line and
-	// change the string parameter as needed.
+    // This is also a good place to display
+    // your game title or a welcome message
+    // in the status line above the grid.
+    // Uncomment the following code line and
+    // change the string parameter as needed.
 
-	// PS.statusText( "Game" );
+    // PS.statusText( "Game" );
 
-	// Add any other initialization code you need here.
+    // Add any other initialization code you need here.
 };
 
 /*
@@ -88,13 +110,20 @@ This function doesn't have to do anything. Any value returned is ignored.
 */
 
 PS.touch = function( x, y, data, options ) {
-	// Uncomment the following code line
-	// to inspect x/y parameters:
+    if(PS.glyph(x,y)===PS.glyph(x,y,"*")){
+        PS.statusText("Castin the line!");
+        castLine(x);
+    }else{
+        PS.statusText("Gotta click from the shore!");
+        PS.glyph(x,y,"");
+    }
+    // Uncomment the following code line
+    // to inspect x/y parameters:
 
-	// PS.debug( "PS.touch() @ " + x + ", " + y + "\n" );
+    // PS.debug( "PS.touch() @ " + x + ", " + y + "\n" );
 
-	// Add code here for mouse clicks/touches
-	// over a bead.
+    // Add code here for mouse clicks/touches
+    // over a bead.
 };
 
 /*
@@ -108,11 +137,11 @@ This function doesn't have to do anything. Any value returned is ignored.
 */
 
 PS.release = function( x, y, data, options ) {
-	// Uncomment the following code line to inspect x/y parameters:
+    // Uncomment the following code line to inspect x/y parameters:
 
-	// PS.debug( "PS.release() @ " + x + ", " + y + "\n" );
+    // PS.debug( "PS.release() @ " + x + ", " + y + "\n" );
 
-	// Add code here for when the mouse button/touch is released over a bead.
+    // Add code here for when the mouse button/touch is released over a bead.
 };
 
 /*
@@ -126,11 +155,11 @@ This function doesn't have to do anything. Any value returned is ignored.
 */
 
 PS.enter = function( x, y, data, options ) {
-	// Uncomment the following code line to inspect x/y parameters:
+    // Uncomment the following code line to inspect x/y parameters:
 
-	// PS.debug( "PS.enter() @ " + x + ", " + y + "\n" );
+    // PS.debug( "PS.enter() @ " + x + ", " + y + "\n" );
 
-	// Add code here for when the mouse cursor/touch enters a bead.
+    // Add code here for when the mouse cursor/touch enters a bead.
 };
 
 /*
@@ -144,11 +173,11 @@ This function doesn't have to do anything. Any value returned is ignored.
 */
 
 PS.exit = function( x, y, data, options ) {
-	// Uncomment the following code line to inspect x/y parameters:
+    // Uncomment the following code line to inspect x/y parameters:
 
-	// PS.debug( "PS.exit() @ " + x + ", " + y + "\n" );
+    // PS.debug( "PS.exit() @ " + x + ", " + y + "\n" );
 
-	// Add code here for when the mouse cursor/touch exits a bead.
+    // Add code here for when the mouse cursor/touch exits a bead.
 };
 
 /*
@@ -159,11 +188,11 @@ This function doesn't have to do anything. Any value returned is ignored.
 */
 
 PS.exitGrid = function( options ) {
-	// Uncomment the following code line to verify operation:
+    // Uncomment the following code line to verify operation:
 
-	// PS.debug( "PS.exitGrid() called\n" );
+    // PS.debug( "PS.exitGrid() called\n" );
 
-	// Add code here for when the mouse cursor/touch moves off the grid.
+    // Add code here for when the mouse cursor/touch moves off the grid.
 };
 
 /*
@@ -177,11 +206,11 @@ This function doesn't have to do anything. Any value returned is ignored.
 */
 
 PS.keyDown = function( key, shift, ctrl, options ) {
-	// Uncomment the following code line to inspect first three parameters:
+    // Uncomment the following code line to inspect first three parameters:
 
-	// PS.debug( "PS.keyDown(): key=" + key + ", shift=" + shift + ", ctrl=" + ctrl + "\n" );
+    // PS.debug( "PS.keyDown(): key=" + key + ", shift=" + shift + ", ctrl=" + ctrl + "\n" );
 
-	// Add code here for when a key is pressed.
+    // Add code here for when a key is pressed.
 };
 
 /*
@@ -195,11 +224,11 @@ This function doesn't have to do anything. Any value returned is ignored.
 */
 
 PS.keyUp = function( key, shift, ctrl, options ) {
-	// Uncomment the following code line to inspect first three parameters:
+    // Uncomment the following code line to inspect first three parameters:
 
-	// PS.debug( "PS.keyUp(): key=" + key + ", shift=" + shift + ", ctrl=" + ctrl + "\n" );
+    // PS.debug( "PS.keyUp(): key=" + key + ", shift=" + shift + ", ctrl=" + ctrl + "\n" );
 
-	// Add code here for when a key is released.
+    // Add code here for when a key is released.
 };
 
 /*
@@ -212,7 +241,7 @@ NOTE: Currently, only mouse wheel events are reported, and only when the mouse c
 */
 
 PS.input = function( sensors, options ) {
-	// Uncomment the following code lines to inspect first parameter:
+    // Uncomment the following code lines to inspect first parameter:
 
 //	 var device = sensors.wheel; // check for scroll wheel
 //
@@ -220,6 +249,60 @@ PS.input = function( sensors, options ) {
 //	   PS.debug( "PS.input(): " + device + "\n" );
 //	 }
 
-	// Add code here for when an input event is detected.
+    // Add code here for when an input event is detected.
 };
 
+function fishSpawn(){
+    var fishRow = PS.random(rowNum);
+    var fishCol = PS.random(columnNum-1);
+    if(fishCol<columnNum/2){
+        PS.glyph(fishRow,fishCol,fishLeft);
+    }
+    if(fishCol>columnNum/2){
+        PS.glyph(fishRow,fishCol,fishRight);
+    }
+
+    fishnum--;
+}
+
+// function fishMovement(){
+//     if(counter<1){
+//         PS.timerStop();
+//     }
+//     for(let x= 1;x < rowNum;x++){
+//         for(let y = 0; y < columnNum;y++){
+//             if(PS.glyph(x,y)===PS.glyph(x,y,fishLeft)){
+//                 if(y-1<0){
+//                     PS.glyph(x,columnNum,fishLeft);
+//                 }
+//                 PS.glyph(x,y--,fishLeft);
+//             }else if(PS.glyph(x,y)===PS.glyph(x,y,fishRight)){
+//                 if(y++>columnNum){
+//                     PS.glyph(x,0,fishRight);
+//                 }
+//                 PS.glyph(x,y++,fishRight)
+//             }
+//             counter--;
+//         }
+//     }
+// }
+
+function castLine(x){
+    var fishCount=0;
+    for(let y=0;y<rowNum;y++){
+        var glyphAt = PS.glyph(x,y)
+        if(glyphAt===PS.glyph(x,y,fishLeft)||glyphAt===PS.glyph(x,y,fishRight)){
+            fishCount++;
+            PS.glyph(x,y,"");
+            fishnum--;
+            fishCount++;
+        }else{
+            PS.glyph(x,y,"");
+        }
+        PS.glyph(x,0,"*");
+        PS.statusText("Caught "+fishCount/2+" of'em!");
+    }
+    if(fishnum<1){
+        PS.statusText("You caught all of them, refresh for a new pond");
+    }
+}
