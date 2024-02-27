@@ -50,10 +50,13 @@ Any value returned is ignored.
 var columnNum = 10;
 var rowNum = 10;
 var fishnum = 5;
-var fishLeft = "<";
-var fishRight = ">";
-//var counter=20;
-//var timerID;
+
+var counter=20;
+var timerID;
+var hookCounter = 1;
+var fishCount = 0;
+var secondTimerID;
+var movingX;
 
 PS.init = function( system, options ) {
     // Uncomment the following code line
@@ -86,7 +89,7 @@ PS.init = function( system, options ) {
     while(fishnum>0)
         fishSpawn();
     fishnum=5;
-    //timerID = PS.timerStart(60,fishMovement);
+    timerID = PS.timerStart(60,fishMovement);
 
     // This is also a good place to display
     // your game title or a welcome message
@@ -112,7 +115,9 @@ This function doesn't have to do anything. Any value returned is ignored.
 PS.touch = function( x, y, data, options ) {
     if(PS.glyph(x,y)===PS.glyph(x,y,"*")){
         PS.statusText("Castin the line!");
-        castLine(x);
+        movingX=x;
+        secondTimerID = PS.timerStart(60,movingHook);
+        hookCounter=1;
     }else{
         PS.statusText("Gotta click from the shore!");
         PS.glyph(x,y,"");
@@ -255,43 +260,36 @@ PS.input = function( sensors, options ) {
 function fishSpawn(){
     var fishRow = PS.random(rowNum);
     var fishCol = PS.random(columnNum-1);
-    if(fishCol<columnNum/2){
-        PS.glyph(fishRow,fishCol,fishLeft);
-    }
-    if(fishCol>columnNum/2){
-        PS.glyph(fishRow,fishCol,fishRight);
-    }
+    PS.glyph(fishRow,fishCol,0x1F41F);
 
     fishnum--;
 }
 
-// function fishMovement(){
-//     if(counter<1){
-//         PS.timerStop();
-//     }
-//     for(let x= 1;x < rowNum;x++){
-//         for(let y = 0; y < columnNum;y++){
-//             if(PS.glyph(x,y)===PS.glyph(x,y,fishLeft)){
-//                 if(y-1<0){
-//                     PS.glyph(x,columnNum,fishLeft);
-//                 }
-//                 PS.glyph(x,y--,fishLeft);
-//             }else if(PS.glyph(x,y)===PS.glyph(x,y,fishRight)){
-//                 if(y++>columnNum){
-//                     PS.glyph(x,0,fishRight);
-//                 }
-//                 PS.glyph(x,y++,fishRight)
-//             }
-//             counter--;
-//         }
-//     }
-// }
+function fishMovement(){
+    if(counter<1){
+        PS.timerStop(timerID);
+    }
+    for(let x= 1;x < rowNum;x++){
+        for(let y = 0; y<columnNum;y++){
+            let glyphAt = PS.glyph(x,y)
+            if(glyphAt===0x1F41F){
+                if(x-1===0){
+                    PS.glyph(rowNum,y, glyphAt);
+                }else{
+                    PS.glyph(x-1,y, glyphAt);
+                }
+                PS.glyph(x,y,"");
+            }
+        }
+    }
+    counter--;
+}
 
 function castLine(x){
     var fishCount=0;
     for(let y=0;y<rowNum;y++){
         var glyphAt = PS.glyph(x,y)
-        if(glyphAt===PS.glyph(x,y,fishLeft)||glyphAt===PS.glyph(x,y,fishRight)){
+        if(glyphAt===PS.glyph(x,y,0x1F41F)){
             fishCount++;
             PS.glyph(x,y,"");
             fishnum--;
@@ -304,5 +302,21 @@ function castLine(x){
     }
     if(fishnum<1){
         PS.statusText("You caught all of them, refresh for a new pond");
+    }
+}
+
+function movingHook(){
+    let hookCode = 0x1FA9D;
+    var glyphAt = PS.glyph(movingX,hookCounter);
+    if (glyphAt===0x1F41F){
+        fishnum--;
+    }
+    PS.glyph(movingX,hookCounter,hookCode);
+    hookCounter++;
+    if(hookCounter>=rowNum){
+        PS.timerStop(secondTimerID);
+        for(let i=1; i<rowNum;i++){
+            PS.glyph(movingX,i,"");
+        }
     }
 }
