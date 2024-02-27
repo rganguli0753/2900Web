@@ -287,6 +287,8 @@ function movingHook(){
     var glyphAt = PS.glyph(movingX,hookCounter);
     if (glyphAt===0x1F41F){
         fishnum--;
+        if(fishnum===0)
+            PS.statusText("You caught all the fish, reload for new pond");
     }
     PS.glyph(movingX,hookCounter,hookCode);
     hookCounter++;
