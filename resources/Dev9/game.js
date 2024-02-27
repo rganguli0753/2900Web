@@ -258,7 +258,7 @@ PS.input = function( sensors, options ) {
 };
 
 function fishSpawn(){
-    var fishRow = PS.random(rowNum);
+    var fishRow = PS.random(rowNum-1);
     var fishCol = PS.random(columnNum-1);
     PS.glyph(fishRow,fishCol,0x1F41F);
 
@@ -266,9 +266,6 @@ function fishSpawn(){
 }
 
 function fishMovement(){
-    if(counter<1){
-        PS.timerStop(timerID);
-    }
     for(let x= 1;x < rowNum;x++){
         for(let y = 0; y<columnNum;y++){
             let glyphAt = PS.glyph(x,y)
@@ -282,28 +279,8 @@ function fishMovement(){
             }
         }
     }
-    counter--;
 }
 
-function castLine(x){
-    var fishCount=0;
-    for(let y=0;y<rowNum;y++){
-        var glyphAt = PS.glyph(x,y)
-        if(glyphAt===PS.glyph(x,y,0x1F41F)){
-            fishCount++;
-            PS.glyph(x,y,"");
-            fishnum--;
-            fishCount++;
-        }else{
-            PS.glyph(x,y,"");
-        }
-        PS.glyph(x,0,"*");
-        PS.statusText("Caught "+fishCount/2+" of'em!");
-    }
-    if(fishnum<1){
-        PS.statusText("You caught all of them, refresh for a new pond");
-    }
-}
 
 function movingHook(){
     let hookCode = 0x1FA9D;
